@@ -1,0 +1,58 @@
+---
+import Atelier from "../layouts/Atelier.astro";
+import { getCollection } from "astro:content";
+import site, { coverFor, dzialSlug } from "../site.config";
+
+const posts = (await getCollection("stylowe")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const featured = posts[0];
+const rest = posts.slice(1);
+---
+<Atelier title={site.name} description={site.tagline} image={site.heroImage}>
+  <main>
+    {featured && (
+      <section class="clip-diagonal relative bg-blush/40">
+        <div class="mx-auto grid max-w-6xl gap-8 px-4 py-16 lg:grid-cols-12 lg:items-center">
+          <div class="lg:col-span-5 lg:order-2">
+            <p class="text-[10px] font-semibold uppercase tracking-runway text-champagne">Look dnia · {featured.data.look || featured.data.category}</p>
+            <h1 class="mt-3 font-display text-4xl font-semibold leading-[1.05] text-espresso md:text-6xl">
+              <a href={`/stylowe/${featured.slug}/`} class="hover:text-champagne">{featured.data.title}</a>
+            </h1>
+            <p class="mt-5 text-lg leading-relaxed text-smoke">{featured.data.description}</p>
+            <a href={`/stylowe/${featured.slug}/`} class="mt-8 inline-block border border-espresso px-5 py-2 text-xs font-semibold uppercase tracking-widest hover:bg-espresso hover:text-cream">Czytaj look →</a>
+          </div>
+          <a href={`/stylowe/${featured.slug}/`} class="editorial-shadow lg:col-span-7 lg:order-1">
+            <img src={coverFor(featured.data.category, featured.data.image)} alt="" class="aspect-[4/5] w-full object-cover" />
+          </a>
+        </div>
+      </section>
+    )}
+
+    <section class="mx-auto max-w-6xl px-4 py-12">
+      <nav class="flex flex-wrap gap-2 border-y border-espresso/10 py-5">
+        {site.dzialy.map((d) => (
+          <a href={`/dzialy/${dzialSlug(d.name)}/`} class="border border-espresso/20 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-widest hover:border-espresso hover:bg-espresso hover:text-cream">{d.name}</a>
+        ))}
+      </nav>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-12">
+        {rest.map((post, i) => (
+          <article class={`${i % 5 === 0 ? "md:col-span-7" : i % 5 === 1 ? "md:col-span-5" : i % 5 === 2 ? "md:col-span-4" : i % 5 === 3 ? "md:col-span-4" : "md:col-span-4"} group`}>
+            <a href={`/stylowe/${post.slug}/`} class="editorial-shadow block overflow-hidden bg-white">
+              <img
+                src={coverFor(post.data.category, post.data.image)}
+                alt=""
+                class={`w-full object-cover transition duration-500 group-hover:scale-[1.02] ${i % 4 === 0 ? "aspect-[3/4]" : i % 4 === 1 ? "aspect-square" : "aspect-[5/6]"}`}
+              />
+            </a>
+            <p class="mt-3 text-[10px] uppercase tracking-runway text-champagne">Look {String(i + 2).padStart(2, "0")} · {post.data.category}</p>
+            <h2 class="mt-1 font-display text-2xl font-semibold leading-tight">
+              <a href={`/stylowe/${post.slug}/`} class="hover:text-champagne">{post.data.title}</a>
+            </h2>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</Atelier>

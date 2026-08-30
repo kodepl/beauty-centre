@@ -1,0 +1,18 @@
+---
+import Atelier from "../../layouts/Atelier.astro";
+import site, { dzialSlug } from "../../site.config";
+---
+<Atelier title="Działy" description="Tematy redakcji Beauty Centre">
+  <main class="mx-auto max-w-5xl px-4 py-12">
+    <h1 class="font-display text-5xl font-semibold italic">Działy</h1>
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      {site.dzialy.map((d, i) => (
+        <a href={`/dzialy/${dzialSlug(d.name)}/`} class="editorial-shadow border border-espresso/10 bg-white p-8 transition hover:-translate-y-1">
+          <p class="font-accent text-4xl text-champagne">{String(i + 1).padStart(2, "0")}</p>
+          <h2 class="mt-2 font-display text-3xl font-semibold">{d.name}</h2>
+          <p class="mt-3 text-sm text-smoke">{d.blurb}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</Atelier>

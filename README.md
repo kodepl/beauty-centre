@@ -1,2 +1,4 @@
-# beauty-centre
-beautycentre.pl - blog modowy
+# Beauty Centre
+
+Blog modowy — Astro + Tailwind (layout Atelier).
+Domena: https://www.beautycentre.pl
