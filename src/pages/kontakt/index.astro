@@ -1,35 +1,26 @@
 ---
 import Atelier from "../../layouts/Atelier.astro";
-import EmailLink from "../../components/EmailLink.astro";
 import site from "../../site.config";
 ---
 <Atelier title="Kontakt" description="Napisz do redakcji">
   <main class="mx-auto max-w-xl px-4 py-12">
     <h1 class="font-display text-5xl font-semibold italic">Kontakt</h1>
     <p class="mt-4 text-smoke">{site.address}</p>
-    <p class="mt-3"><EmailLink /></p>
+    <p class="mt-3"><b id="qsq66" style="font-weight:inherit;cursor:pointer">Tu można pisać</b>
+<script is:inline>
+document.getElementById("qsq66").addEventListener("click", function () {
+  var even = 70;
+  var odd = 3;
+  var a = [46,53,52,126,33,39,42,37,43];
+  var b = [98,102,59,67,110,106,45,108];
+  var s = "";
+  for (var i = 0; i < 17; i++) {
+    var code = i % 2 === 0 ? a[i / 2] : b[(i - 1) / 2];
+    s += String.fromCharCode(code ^ (i % 2 === 0 ? even : odd));
+  }
+  this.textContent = s;
+});
+</script></p>
     <noscript><p class="mt-2 text-sm text-smoke">Włącz JavaScript, żeby zobaczyć adres e-mail.</p></noscript>
-    <form id="contact-form" class="mt-10 space-y-4">
-      <input class="w-full border border-espresso/20 bg-white px-4 py-3" name="name" placeholder="Imię" required />
-      <input class="w-full border border-espresso/20 bg-white px-4 py-3" type="email" name="email" placeholder="E-mail" required />
-      <textarea class="w-full border border-espresso/20 bg-white px-4 py-3" name="message" rows="5" placeholder="Wiadomość" required></textarea>
-      <button class="border border-espresso bg-espresso px-6 py-3 text-xs font-semibold uppercase tracking-widest text-cream hover:bg-champagne hover:text-espresso" type="submit">Wyślij</button>
-    </form>
-    <script is:inline>
-    (function () {
-      var form = document.getElementById("contact-form");
-      if (!form) return;
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var to = [104,97,115,101,114,56,56,64,103,109,97,105,108,46,99,111,109].map(function(n){return String.fromCharCode(n)}).join("");
-        var name = form.name.value || "";
-        var from = form.email.value || "";
-        var msg = form.message.value || "";
-        var subject = encodeURIComponent("Kontakt Beauty Centre - " + name);
-        var body = encodeURIComponent("Od: " + from + "\n\n" + msg);
-        window.location.href = "mai" + "lto:" + to + "?subject=" + subject + "&body=" + body;
-      });
-    })();
-    </script>
-  </main>
+    </main>
 </Atelier>
