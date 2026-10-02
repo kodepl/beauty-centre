@@ -46,7 +46,8 @@ const ticker = [...site.ticker, ...site.ticker];
           <a href="/dzialy/" class="rounded-sm px-3 py-2 hover:bg-blush/60">Działy</a>
           <a href="/redakcja/" class="rounded-sm px-3 py-2 hover:bg-blush/60">Redakcja</a>
           <a href="/kontakt/" class="rounded-sm px-3 py-2 hover:bg-blush/60">Kontakt</a>
-        </nav>
+        <a href="/lookbook/">Szukaj</a>
+          </nav>
       </div>
     </header>
 
@@ -75,5 +76,14 @@ const ticker = [...site.ticker, ...site.ticker];
       </div>
     </footer>
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"79e8dd6b91774df09d808c72e68335ef"}'></script>
+  <div id="pasek-beauty-centre" style="position:fixed;top:0;left:0;height:3px;width:0;background:#a16207;z-index:40;pointer-events:none"></div>
+    <script>
+      const pasek = document.getElementById("pasek-beauty-centre");
+      addEventListener("scroll", () => {
+        const node = document.documentElement;
+        const max = node.scrollHeight - node.clientHeight;
+        pasek.style.width = (max > 0 ? (node.scrollTop / max) * 100 : 0) + "%";
+      }, { passive: true });
+    </script>
   </body>
 </html>
